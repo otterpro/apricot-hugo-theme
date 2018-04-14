@@ -1,0 +1,429 @@
+/* temp debugging */
+/**
+ * TODO: use CSS Variables
+ * TODO: use modern CSS
+ */
+
+/**
+ * Reset some basic elements
+ */
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0; }
+
+/* enable sane box model */
+/* https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+/**
+ * Basic styling
+ */
+body {
+  font-family: "Lucida Grande", "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #000;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%; }
+
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+.highlight {
+  margin-bottom: 15px; }
+
+/**
+ * Images
+ */
+img {
+  max-width: 100%;
+  /* ensures responsiveness of image */
+  vertical-align: middle; }
+
+/**
+ * Figures
+ */
+figure > img {
+  display: block; }
+
+figcaption {
+  font-size: 14px; }
+
+/**
+ * Lists
+ */
+ul, ol {
+  margin-left: 30px; }
+
+li > ul,
+li > ol {
+  margin-bottom: 0; }
+
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300; }
+
+h1 {
+  font-size: 1.3em; }
+
+h2 {
+  font-size: 1.2em; }
+
+h3, h4, h5, h6 {
+  font-size: 1.1em; }
+
+/* Add padding to h1 since it looks strange without it
+	TODO: move this to .article-list/title instead?
+	h1,h2 is also used commonly for markdown text, 
+	so I used similar style from github's markdown examples.
+*/
+h1, h2 {
+  margin-top: 1em; }
+
+/* h1, draw line after text */
+h1, h2 {
+  border-bottom: 1px solid #eee; }
+
+/**
+ * Links
+ */
+a {
+  color: #2a7ae2;
+  text-decoration: none; }
+  a:hover {
+    color: #000;
+    text-decoration: underline; }
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  color: Gray;
+  border-left: 4px solid LightGray;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+/**
+ * Code formatting
+ */
+pre,
+code {
+  font-family: monospace;
+  font-size: 16px;
+  border: 1px solid lightGray;
+  border-radius: 3px;
+  background-color: #eef; }
+
+code {
+  padding: 1px 5px; }
+
+pre {
+  padding: 8px 12px;
+  overflow-x: scroll; }
+  pre > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0; }
+
+/**
+ * Icons
+ Renamed from .icon to .social-icon
+ */
+.social-icon > svg {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle; }
+  .social-icon > svg path {
+    fill: Gray; }
+
+/* wraps around main area, including content and sidebar */
+/* responsive */
+main {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px; }
+
+aside {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 20px; }
+
+.two-column-content {
+  width: 100; }
+
+@media screen and (min-width: 640px) {
+  .two-column-content {
+    width: 70%;
+    float: left; }
+
+  aside {
+    width: 30%;
+    float: left; } }
+.tag-detail {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2; }
+
+/**
+	Here only for historical reason?
+
+ * Wrapper - Original Jekyll wrapperc
+	Useful for main content wrapper
+	* has significant left,right margin 
+
+ */
+.wrapper {
+  max-width: 1600px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 130px;
+  padding-left: 130px;
+  padding-bottom: 1em;
+  /* mobile and small screen */ }
+  @media screen and (max-width: 1000px) {
+    .wrapper {
+      padding-right: 15px;
+      padding-left: 15px; } }
+
+/* Clearfix */
+.wrapper:after, .group:after, .footer-col-wrapper:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+/**
+ * Site header
+ */
+.site-header {
+  min-height: 56px;
+  position: relative;
+  height: 250px; }
+
+.site-header a:link {
+  text-decoration: none; }
+
+.site-title {
+  font-size: 26px;
+  line-height: 56px;
+  letter-spacing: -1px;
+  margin-bottom: 0;
+  float: left;
+  color: white;
+  text-shadow: 2px 2px 8px black, -2px -2px 8px black; }
+  .site-title, .site-title:visited {
+    color: white; }
+
+.article-title-in-header {
+  color: white;
+  font-size: 1.5em;
+  background-color: rgba(0, 0, 0, 0.55);
+  margin-bottom: 0px;
+  width: 100%;
+  left: 0px;
+  bottom: 0;
+  position: absolute;
+  text-align: center; }
+
+.article-title-in-header2 {
+  color: white;
+  font-size: 1.5em;
+  background-color: rgba(0, 0, 0, 0.55);
+  margin-bottom: 0px;
+  width: 100%;
+  left: 0px;
+  top: 210px;
+  position: absolute;
+  text-align: center; }
+
+.site-nav {
+  float: right;
+  line-height: 56px; }
+  .site-nav .menu-icon {
+    display: none; }
+  .site-nav .page-link {
+    color: #000;
+    line-height: 1.5;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 8px white, -2px -2px 8px white; }
+    .site-nav .page-link:not(:first-child) {
+      margin-left: 20px; }
+  @media screen and (max-width: 640px) {
+    .site-nav {
+      position: absolute;
+      top: 9px;
+      right: 30px;
+      background-color: #fdfdfd;
+      border: 1px solid LightGray;
+      border-radius: 5px;
+      text-align: right; }
+      .site-nav .menu-icon {
+        display: block;
+        float: right;
+        width: 36px;
+        height: 26px;
+        line-height: 0;
+        padding-top: 10px;
+        text-align: center; }
+        .site-nav .menu-icon > svg {
+          width: 18px;
+          height: 15px; }
+          .site-nav .menu-icon > svg path {
+            fill: DarkGray; }
+      .site-nav .trigger {
+        clear: both;
+        display: none; }
+      .site-nav:hover .trigger {
+        display: block;
+        padding-bottom: 5px; }
+      .site-nav .page-link {
+        display: block;
+        padding: 5px 10px; } }
+
+/**
+ * Site footer
+ */
+/* footer except for last line */
+.footer-main {
+  background-color: #ccc;
+  padding: 20px 20px 0px 20px; }
+
+.tag-list,
+.footer-latest-posts,
+.social-media-list {
+  list-style: none;
+  margin-left: 0; }
+
+.footer-col-wrapper {
+  font-size: 15px;
+  color: Gray;
+  margin-left: -15px; }
+
+.footer-col {
+  float: left;
+  margin-bottom: 15px;
+  padding-left: 15px; }
+
+.footer-col-1 {
+  width: 30%; }
+
+.footer-col-2 {
+  width: 30%; }
+
+.footer-col-3 {
+  width: 40%; }
+
+.footer-last-line {
+  font-size: .8em;
+  background-color: DarkGray;
+  color: Gray;
+  text-align: center; }
+
+.footer-last-line a {
+  color: Gray; }
+
+@media screen and (max-width: 1000px) {
+  .footer-col-1,
+  .footer-col-2 {
+    width: -webkit-calc(50% - (30px / 2));
+    width: calc(50% - (30px / 2)); }
+
+  .footer-col-3 {
+    width: -webkit-calc(100% - (30px / 2));
+    width: calc(100% - (30px / 2)); } }
+@media screen and (max-width: 640px) {
+  .footer-col {
+    float: none;
+    width: -webkit-calc(100% - (30px / 2));
+    width: calc(100% - (30px / 2)); } }
+/**
+ * 
+ */
+/* content area, main text */
+.article-list {
+  margin-left: 0;
+  list-style: none; }
+  .article-list > li {
+    margin-bottom: 30px; }
+
+.article-link {
+  display: block;
+  font-size: 24px; }
+
+.article-meta {
+  font-size: 14px;
+  color: Gray; }
+
+/* NOT USED??? */
+article {
+  font-size: 1.3em; }
+
+/* partially based on http://www.wpbeginner.com/wp-themes/how-to-add-numeric-pagination-in-your-wordpress-theme/  */
+.pagination a,
+.pagination a:hover,
+.pagination .active a,
+.pagination .disabled {
+  color: #fff;
+  text-decoration: none; }
+
+.pagination {
+  text-align: center; }
+
+.pagination a,
+.pagination a:hover,
+.pagination .active a,
+.pagination .disabled_link {
+  cursor: pointer;
+  background-color: #6FB7E9;
+  border-radius: 3px;
+  padding: 4px;
+  padding: 0.2rem; }
+
+.pagination .disabled_link {
+  background-color: #DDD;
+  cursor: auto; }
+
+.pagination a:hover {
+  background-color: #3C8DC5; }
+
+a.category {
+  padding: 0 .3em;
+  font-size: .6em;
+  letter-spacing: .05em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: .3em;
+  color: white;
+  background-color: #888;
+  background-color: #888; }
+
+a.tag {
+  padding: 0 .3em;
+  font-size: .6em;
+  letter-spacing: .05em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: .3em;
+  color: white;
+  background-color: #888;
+  background-color: #AAA; }

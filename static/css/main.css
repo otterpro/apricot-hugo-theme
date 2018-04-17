@@ -1,7 +1,7 @@
-/* temp debugging */
 /**
  * TODO: use CSS Variables
  * TODO: use modern CSS
+ * TODO: use unCSS or FF tool to find what which ones are not being used
  */
 
 /**
@@ -356,6 +356,19 @@ aside {
  * 
  */
 /* content area, main text */
+
+article {
+  font-size: 1em;
+}
+.article-meta {
+  font-size: 14px;
+  color: Gray; }
+
+
+
+/* NOT USED??? */
+/* partially based on http://www.wpbeginner.com/wp-themes/how-to-add-numeric-pagination-in-your-wordpress-theme/  */
+
 .article-list {
   margin-left: 0;
   list-style: none; }
@@ -366,15 +379,6 @@ aside {
   display: block;
   font-size: 24px; }
 
-.article-meta {
-  font-size: 14px;
-  color: Gray; }
-
-/* NOT USED??? */
-article {
-  font-size: 1.3em; }
-
-/* partially based on http://www.wpbeginner.com/wp-themes/how-to-add-numeric-pagination-in-your-wordpress-theme/  */
 .pagination a,
 .pagination a:hover,
 .pagination .active a,

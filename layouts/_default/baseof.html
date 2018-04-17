@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html{{ with .Site.LanguageCode }} lang="{{ . }}"{{ end }}>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta content="{{ delimit .Keywords ", " }}" name="keywords">
-<meta content="{{ $isHomePage := eq .Title .Site.Title }}{{ .Title }}{{ if eq $isHomePage false }} - {{ .Site.Title }}{{ end }}" property="og:title">
-<title>{{ .Title }}{{ if eq .IsHome false }} | {{ .Site.Title }}{{ end }}</title>
-<link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="{{ delimit .Keywords ", " }}" name="keywords">
+    <meta content="{{ $isHomePage := eq .Title .Site.Title }}{{ .Title }}{{ if eq $isHomePage false }} - {{ .Site.Title }}{{ end }}" property="og:title">
+    <title>{{ .Title }}{{ if eq .IsHome false }} | {{ .Site.Title }}{{ end }}</title>
+    <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css">
+    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{.Site.BaseURL}}/feed.xml" />
 
-{{/********************** TODO: MOVE highlight.js into page.html *******************/}}
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-{{ with .Site.Params.apricot.highlight.style }}
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/{{ . }}.min.css">
-{{ else }}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
-{{ end }}
-<body>
-{{ partial "nav" . }}
-<main class="wrapper">
-  {{ block "main" . }}
-   <!-- override in other pages -->
-  {{ end }}
-</main>
-<section class="section">
-  <div class="container has-text-centered">
-    <p>{{ .Site.Copyright | safeHTML }}</p>
-  </div>
-</section>
-{{/********************** TODO: MOVE highlight.js into page.html *******************/}}
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
-{{ range .Site.Params.highlight.languages }}
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/{{ . }}.min.js"></script>
-{{ end }}
-<script>hljs.initHighlightingOnLoad();</script>
+    {{/********************** TODO: MOVE highlight.js into page.html *******************/}}
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    {{ with .Site.Params.apricot.highlight.style }}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/{{ . }}.min.css">
+    {{ else }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
+    {{ end }}
+  </head>
+  <body>
+    {{ partial "header" . }}
+    {{ partial "nav" . }}
+    <main class="wrapper">
+      {{ block "main" . }}
+      <!-- override in other pages -->
+      {{ end }}
+    </main>
 
-{{ if .Site.GoogleAnalytics }} {{ template "_internal/google_analytics_async.html" . }} {{ end }}
+    {{ partial "footer" . }}
 
-</body>
+    {{/********************** TODO: MOVE highlight.js into page.html *******************/}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+    {{ range .Site.Params.highlight.languages }}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/{{ . }}.min.js"></script>
+    {{ end }}
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    {{ if .Site.GoogleAnalytics }} {{ template "_internal/google_analytics_async.html" . }} {{ end }}
+
+  </body>
 </html>

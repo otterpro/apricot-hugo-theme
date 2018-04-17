@@ -1,1 +1,22 @@
-{{ template "theme/_default/list.html" . }}
+{{/* template "theme/_default/list.html" .*/}}
+{{ define "main" }}
+{{ range sort .Paginator.Pages }}
+<article>
+  <h1>
+    <a href="{{ .Permalink }}">
+      {{ if .Title }} {{- .Title -}}
+      {{ else }} {{/* use filename if frontmatter is missing title */}}
+        {{ .File.TranslationBaseName | title }}
+      {{ end }}
+    </a>{{ if .Draft }} ::Draft{{ end }}
+  </h1>
+  {{ partial "article_meta" . }}
+  {{ .Summary | plainify | safeHTML }}
+  {{ if .Truncated }}
+  <a class="read-more" href="{{ .Permalink }}"> [Read more...] </a>
+  {{ end }}
+</article>
+{{ end }}
+{{ partial "pager" . }}
+
+{{ end }}

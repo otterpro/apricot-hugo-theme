@@ -3,7 +3,7 @@
 {{ range sort .Paginator.Pages }}
 <article>
   <h1>
-    {{ partial "article_title" . }}
+    <a href="{{ .Permalink }}"> {{ partial "article_title" . }} </a>
   </h1>
   {{ partial "article_meta" . }}
   {{ .Summary | plainify | safeHTML }}

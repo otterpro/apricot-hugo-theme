@@ -1,6 +1,2 @@
-    <a href="{{ .Permalink }}">
-      {{ if .Title }} {{- .Title -}}
-      {{ else }} {{/* use filename if frontmatter is missing title */}}
-        {{ .File.TranslationBaseName | title }}
-      {{ end }}
-    </a>{{ if .Draft }} ::Draft{{ end }}
+{{ if .Title }} {{- .Title -}} {{ else }} {{- .File.TranslationBaseName | title -}} {{ end }}
+{{/* use filename if frontmatter is missing title */}}

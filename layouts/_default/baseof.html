@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="{{ delimit .Keywords ", " }}" name="keywords">
-    <meta content="{{ $isHomePage := eq .Title .Site.Title }}{{ .Title }}{{ if eq $isHomePage false }} - {{ .Site.Title }}{{ end }}" property="og:title">
-    <title>{{ .Title }}{{ if eq .IsHome false }} | {{ .Site.Title }}{{ end }}</title>
+    {{ $title := chomp (partial "article_title" .)}}
+    <meta content="{{$title}}{{if not .IsHome}} - {{ .Site.Title}}{{end}}" property="og:title">
+    <title>{{$title}}{{if not .IsHome}}-{{ .Site.Title}}{{end}}</title>
     <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css">
     <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{.Site.BaseURL}}/index.xml" />
 
-    {{/********************** TODO: MOVE highlight.js into page.html *******************/}}
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
+    {{ if not .IsHome }}
     {{ with .Site.Params.apricot.highlight.style }}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/{{ . }}.min.css">
     {{ else }}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" integrity="sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=" crossorigin="anonymous" />
     {{ end }}
+    {{ end }}
+
   </head>
   <body>
-    {{ partialCached "header" . }}
+    {{ partial "header" . }}
     {{ partialCached "nav" . }}
+    
     <main class="wrapper">
       {{ block "main" . }}
       <!-- override in other pages -->
@@ -28,12 +32,13 @@
 
     {{ partialCached "footer" . }}
 
-    {{/********************** TODO: MOVE highlight.js into page.html *******************/}}
+    {{ if not .IsHome }}
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
     {{ range .Site.Params.highlight.languages }}
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/{{ . }}.min.js"></script>
     {{ end }}
     <script>hljs.initHighlightingOnLoad();</script>
+    {{ end }}
 
     {{ if .Site.GoogleAnalytics }} {{ template "_internal/google_analytics_async.html" . }} {{ end }}
 

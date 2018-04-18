@@ -1,15 +1,8 @@
 <header class="site-header" 
   style="background:url(
-    {{ if .Site.Params.apricot.headerImage }}
-      {{ .Site.Params.apricot.headerImage }}
-    {{ else if .Params.img }}
-      {{ if hasPrefix .Params.img "http" }}
-        {{ .Params.img }}
-      {{ else }}
-        /img/{{ .Params.img }}
-      {{ end }}
-    {{ else }}
-      https://c1.staticflickr.com/9/8675/16533077649_518a083613_o.jpg
+    {{ if .Params.img }}{{ .Params.img | safeHTML }}
+    {{ else if .Site.Params.headerImage }}{{ .Site.Params.headerImage | safeHTML }}
+    {{ else }}https://c1.staticflickr.com/9/8675/16533077649_518a083613_o.jpg
     {{ end }}
   ) top center no-repeat fixed ; background-size:100% auto;" >
 
@@ -35,5 +28,14 @@
   </div>
 </nav>
 
+{{/* if hasPrefix .Params.img "http" */}}
+{{/* else }} /img/{{ .Params.img }} {{ end */}}
+
+{{ if not .IsHome }}
+<div class="article-title-in-header">
+  {{ partial "article_title" . }}
+</div> <!-- end of article&#45;title&#45;in&#45;header -->
+{{ end }}
+<!-- make sure that title is sandwiched between header and header_end -->
 </header>
 

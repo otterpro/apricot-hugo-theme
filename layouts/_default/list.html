@@ -6,7 +6,8 @@
 <ul>
     {{ range .Pages }}
     <li>
-    {{ partial "article_title" . }}
+
+    <a href="{{ .Permalink }}"> {{ partial "article_title" . }} </a>
       <span class="article-meta">{{ .Date.Format "Jan 2, 2006" }}</span>
     </li>
     {{ end }}

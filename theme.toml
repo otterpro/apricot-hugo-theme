@@ -2,10 +2,10 @@ name = "Apricot Hugo Theme"
 license = "MIT"
 licenselink = "https://github.com/otterpro/apricot-hugo-theme/blob/master/LICENSE.md"
 description = "Easy-to-read theme for Hugo"
-homepage = "http://example.com/"
+homepage = "https://github.com/otterpro/apricot-hugo-theme/"
 tags = []
 features = []
-min_version = "0.36.1"
+min_version = "0.38.2"
 
 [author]
   name = "Daniel Kim"

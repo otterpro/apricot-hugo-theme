@@ -7,7 +7,7 @@
     <meta content="{{ $isHomePage := eq .Title .Site.Title }}{{ .Title }}{{ if eq $isHomePage false }} - {{ .Site.Title }}{{ end }}" property="og:title">
     <title>{{ .Title }}{{ if eq .IsHome false }} | {{ .Site.Title }}{{ end }}</title>
     <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css">
-    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{.Site.BaseURL}}/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{.Site.BaseURL}}/index.xml" />
 
     {{/********************** TODO: MOVE highlight.js into page.html *******************/}}
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -18,15 +18,15 @@
     {{ end }}
   </head>
   <body>
-    {{ partial "header" . }}
-    {{ partial "nav" . }}
+    {{ partialCached "header" . }}
+    {{ partialCached "nav" . }}
     <main class="wrapper">
       {{ block "main" . }}
       <!-- override in other pages -->
       {{ end }}
     </main>
 
-    {{ partial "footer" . }}
+    {{ partialCached "footer" . }}
 
     {{/********************** TODO: MOVE highlight.js into page.html *******************/}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>

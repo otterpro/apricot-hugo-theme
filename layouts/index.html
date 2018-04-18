@@ -3,12 +3,7 @@
 {{ range sort .Paginator.Pages }}
 <article>
   <h1>
-    <a href="{{ .Permalink }}">
-      {{ if .Title }} {{- .Title -}}
-      {{ else }} {{/* use filename if frontmatter is missing title */}}
-        {{ .File.TranslationBaseName | title }}
-      {{ end }}
-    </a>{{ if .Draft }} ::Draft{{ end }}
+    {{ partial "article_title" . }}
   </h1>
   {{ partial "article_meta" . }}
   {{ .Summary | plainify | safeHTML }}

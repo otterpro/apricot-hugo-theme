@@ -11,11 +11,10 @@
     {{ else }}
       https://c1.staticflickr.com/9/8675/16533077649_518a083613_o.jpg
     {{ end }}
-
   ) top center no-repeat fixed ; background-size:100% auto;" >
 
   <!-- Header Title -->
-    <a class="site-title" href="{{ .Site.BaseURL }}/">{{ .Site.Title }}</a>
+    <a class="site-title" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
 
     <!-- Page list and button -->
     <nav class="site-nav">
@@ -26,10 +25,14 @@
           <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
         </svg>
       </a>
+
+      <div class="trigger">
+        <!-- URL that should be shown in menu -->
     {{ $currentPage := . }}
     {{ range .Site.Menus.main }}
-    <a class="" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
+    <a class="page-link" href="{{ .URL }}" title="{{ .Title }}">{{ .Name }}</a>
     {{ end }}
+  </div>
 </nav>
 
 </header>

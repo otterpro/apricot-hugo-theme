@@ -1,16 +1,16 @@
-{{/* DONT USE THIS... USE INDEX.HTML for now... */}}
+{{/* Archive list - every blog post, no summary */}}
 {{ define "main" }}
-      {{ range sort .Paginator.Pages }}
-      <article>
-        <h1><a href="{{ .Permalink }}">{{ .Title }}</a>{{ if .Draft }} ::Draft{{ end }}</h1>
-
-{{ partial "article_meta" . }}
-
-          {{ .Summary | plainify | safeHTML }}
-          {{ if .Truncated }}
-          <a class="read-more" href="{{ .Permalink }}"> [Read more...] </a>
-          {{ end }}
-      </article>
-      {{ end }}
-  {{ partial "pager" . }}
+<div class="wrapper">
+{{ range .Data.Pages.GroupByDate "2006" }}
+<h1>{{ .Key }}</h1>
+<ul>
+    {{ range .Pages }}
+    <li>
+    {{ partial "article_title" . }}
+      <span class="article-meta">{{ .Date.Format "Jan 2, 2006" }}</span>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}
+</div>
 {{ end }}

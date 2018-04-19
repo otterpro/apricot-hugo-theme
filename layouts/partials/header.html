@@ -2,7 +2,7 @@
   style="background:url(
     {{ if .Params.img }}{{ .Params.img | safeHTML }}
     {{ else if .Site.Params.headerImage }}{{ .Site.Params.headerImage | safeHTML }}
-    {{ else }}https://c1.staticflickr.com/9/8675/16533077649_518a083613_o.jpg
+    {{ else }}/img/header_default.jpg
     {{ end }}
   ) top center no-repeat fixed ; background-size:100% auto;" >
 

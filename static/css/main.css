@@ -76,13 +76,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300; }
 
 h1 {
-  font-size: 1.3em; }
+  font-size: 1.5rem; }
 
 h2 {
-  font-size: 1.2em; }
+  font-size: 1.3rem; }
 
 h3, h4, h5, h6 {
-  font-size: 1.1em; }
+  font-size: 1.2rem; }
 
 /* Add padding to h1 since it looks strange without it
 	TODO: move this to .article-list/title instead?
@@ -121,23 +121,29 @@ blockquote {
 
 /**
  * Code formatting
+ *
+ *
  */
 pre,
 code {
-  font-family: monospace;
-  font-size: 16px;
+  font-family: consolas, menlo, monaco, 'andale mono', monospace;
   border: 1px solid lightGray;
   border-radius: 3px;
-  background-color: #eef; }
+  color: lightGray;
+  padding: 8px 12px;
+  overflow-x: auto;
+  white-space: pre-wrap; /* enable word-wrap  */
+  background-color: #222;
+  }
 
-code {
+code{
   padding: 1px 5px; }
 
-pre {
-  padding: 8px 12px;
-  overflow-x: scroll; }
+pre{
+}
   pre > code {
     border: 0;
+    background-color: initial; /* allow Chroma/pygment color to show and not be overriden */
     padding-right: 0;
     padding-left: 0; }
 

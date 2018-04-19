@@ -1,6 +1,11 @@
 # Apricot Hugo Theme
 
-Apricot is a theme for blogs.
+Apricot is a theme for blogs. Originally created for Jekyll, I migrated my blog to Hugo and ported the theme as well.
+
+## Goals
+* Made specifically for blogs
+* Easy to read style, with high contrast and large fonts
+* Stylish Table of Contents (not done yet)
 
 ## Pre-requisite
 * Install Hugo on your computer.
@@ -27,6 +32,8 @@ To change the header image for home page, add `headerImage` in `config.toml`
 	[params]
 		...
 		headerImage = "https://source.unsplash.com/zgTXw53Pdko/800x450"
+* Don't forget to place the image file in /static/img/.
+
 
 Example `config.toml`:
 To customize your theme you can use the following settings.

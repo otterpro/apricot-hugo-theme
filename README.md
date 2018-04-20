@@ -13,17 +13,26 @@ Apricot is a theme for blogs. Originally created for Jekyll, I migrated my blog 
 ## Installation
 Inside the folder of our Hugo site, run:
 
-	$ git clone https://github.com/otterpro/apricot-hugo-theme/"
-	$ cd apricot-hugo-theme
+	$ cd MY_SITE_PATH/themes/
+	$ git clone git://github.com/otterpro/apricot-hugo-theme/"
+
+As usual, add to site's config.toml: `theme = "apricot-hugo-theme"` to activate the theme.
+#### Notes:
+* There are no other dependencies.  
+* There are no additional configuration required to get started.   Also see README.md.
+* It was tested with plain hugoBasicExample site. 
+* It was tested with various `baseURL` to make sure it works under different paths.  This seems to be the most common issue with the new theme submission.
 
 ## Configuration
 The `config.toml` should be changed to your needs.
 
-To change the header image for individual blog posts, add the 'img' in the front-matter.
+To change the header image for individual blog posts, add the `headerImage` in the front-matter.
+
+Example: `/content/hello.md`
 
 	---
 	title: Hello World
-	img: /img/selfie1.jpg
+	headerImage: img/selfie1.jpg
 	---
 	Hello world...
 
@@ -36,7 +45,7 @@ To change the header image for home page, add `headerImage` in `config.toml`
 
 
 Example `config.toml`:
-To customize your theme you can use the following settings.
+This is an example of customized config 
 
 	baseURL = "http://www.example.com"
 	languageCode = "en-us"

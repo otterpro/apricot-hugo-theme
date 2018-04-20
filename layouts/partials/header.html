@@ -1,10 +1,12 @@
+{{ $headerImage := $.Param "headerImage" | default "img/header_default.jpg" }}
+{{/* remove leading "/" if present, but not if there are "//" */}}
+{{/* commented out because I need to preserve nested path static assets */}}
+{{/* it's better to use correct URL in frontmatter, despite pain of not having correct URL */}}
+{{/* $headerImage := $headerImage | replaceRE "^/([^/])" "$1" */}} 
+
 <header class="site-header" 
-  style="background:url(
-    {{ if .Params.img }}{{ .Params.img | safeHTML }}
-    {{ else if .Site.Params.headerImage }}{{ .Site.Params.headerImage | safeHTML }}
-    {{ else }}/img/header_default.jpg
-    {{ end }}
-  ) top center no-repeat fixed ; background-size:100% auto;" >
+  style="background:url('{{$headerImage | absURL}}')
+  top center no-repeat fixed ; background-size:100% auto; " >
 
   <!-- Header Title -->
     <a class="site-title" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
@@ -28,8 +30,6 @@
   </div>
 </nav>
 
-{{/* if hasPrefix .Params.img "http" */}}
-{{/* else }} /img/{{ .Params.img }} {{ end */}}
 
 {{ if not .IsHome }}
 <div class="article-title-in-header">

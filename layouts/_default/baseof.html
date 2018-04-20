@@ -7,8 +7,8 @@
     {{ $title := chomp (partial "article_title" .)}}
     <meta content="{{$title}}{{if not .IsHome}} - {{ .Site.Title}}{{end}}" property="og:title">
     <title>{{$title}}{{if not .IsHome}}-{{ .Site.Title}}{{end}}</title>
-    <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css">
-    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{.Site.BaseURL}}/index.xml" />
+    <link rel="stylesheet" href="{{"css/main.css"|absURL}}" >
+    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{.Site.BaseURL}}index.xml" />
 
   
     {{ if and (not .IsHome) (.Site.Params.apricot.highlight.hljsEnabled ) }}

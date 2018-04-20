@@ -1,0 +1,3 @@
+{{ range . }}
+    <a class="category" href="{{ "categories/" | absURL }}{{ . | urlize }}">{{ . }}</a>
+{{ end }}

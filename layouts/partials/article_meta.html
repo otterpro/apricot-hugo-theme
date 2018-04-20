@@ -1,6 +1,10 @@
 <div class="article-meta">
       {{ .Date.Format "Jan 2, 2006" }}
+      {{ if .Params.categories }}
+      {{ partial "categories" .Params.categories }}
+      {{ end }}
       {{ if .Params.tags }}
       {{ partial "tags" .Params.tags }}
       {{ end }}
+      
 </div>

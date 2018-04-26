@@ -8,8 +8,9 @@
     <meta content="{{$title}}{{if not .IsHome}} - {{ .Site.Title}}{{end}}" property="og:title">
     <title>{{$title}}{{if not .IsHome}}-{{ .Site.Title}}{{end}}</title>
     <link rel="stylesheet" href="{{"css/main.css"|absURL}}" >
-    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{.Site.BaseURL}}index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href='{{"index.xml" | absURL}}' />
 
+    <link rel="icon" sizes="16x16 32x32 48x48" href='{{"favicon.ico" | absURL}}' />
   
     {{ if and (not .IsHome) (.Site.Params.apricot.highlight.hljsEnabled ) }}
     {{ with .Site.Params.apricot.highlight.style }}
@@ -41,6 +42,8 @@
     {{ end }}
 
     {{ if .Site.GoogleAnalytics }} {{ template "_internal/google_analytics_async.html" . }} {{ end }}
+
+    <script type="text/javascript" src='{{"js/main.js" | absURL}}'></script>
 
   </body>
 </html>

@@ -52,7 +52,7 @@ This is an example of customized config
 	title = "My Website Title!!!"
 	theme = "apricot-hugo-theme"
 	summaryLength = 15
-	copyright = "Copyright &copy 2018 (INSERT MY NAME). All Rights Reserved."
+	copyright = "Copyright &copy; 2018 (INSERT MY NAME). All Rights Reserved."
 	googleAnalytics = "XXXXX"
 	disqusShortname = "XXXXX"
 

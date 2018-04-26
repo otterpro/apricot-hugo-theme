@@ -1,5 +1,9 @@
 # Release Notes
 
+
+* add generic favicon.ico
+* open external link in new window (`_blank` target).  See `js/main.js`.
+
 ## v0.1.2
 * fixed absURL issue with tags/categories in article_meta.html
 
@@ -10,11 +14,9 @@
 * first release
 
 ## Future plans
-* [ ] add generic favicon.ico
 * [ ] use `Socials` params instead of hard-coded params (Twitter, Instagram, etc)
 * [ ] test and include Disqus
 * [ ] test Google Analytics
-* [ ] open external link to `_blank` target (esp in Menu)
 * [ ] add Table of Contents in single.html and in config.toml, frontmatter
 * [ ] clean up source files, remove unnecessary CSS
 * [ ] minify source, if needed

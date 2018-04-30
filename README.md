@@ -5,7 +5,7 @@ Apricot is a theme for blogs. Originally created for Jekyll, I migrated my blog 
 ## Goals
 * Made specifically for blogs
 * Easy to read style, with high contrast and large fonts
-* Stylish Table of Contents (not done yet)
+* Stylish Table of Contents (not finished yet / coming soon)
 
 ## Pre-requisite
 * Install Hugo on your computer.
@@ -19,8 +19,8 @@ Inside the folder of our Hugo site, run:
 As usual, add to site's config.toml: `theme = "apricot-hugo-theme"` to activate the theme.
 #### Notes:
 * There are no other dependencies.  
-* There are no additional configuration required to get started.   Also see README.md.
-* It was tested with plain hugoBasicExample site. 
+* There are no additional configuration required to get started. 
+* It was tested with plain `hugoBasicExample` site. 
 * It was tested with various `baseURL` to make sure it works under different paths.  This seems to be the most common issue with the new theme submission.
 
 ## Configuration
@@ -41,8 +41,7 @@ To change the header image for home page, add `headerImage` in `config.toml`
 	[params]
 		...
 		headerImage = "https://source.unsplash.com/zgTXw53Pdko/800x450"
-* Don't forget to place the image file in /static/img/.
-
+* Don't forget to place the image file in the correct directory (ie `/static/img/`) .
 
 Example `config.toml`:
 This is an example of customized config 
@@ -83,4 +82,3 @@ This theme is released under the [MIT License](https://github.com/otterpro/apric
 * [Image of apricot label from California Historical Society](https://flic.kr/p/rbYkYV)
 * [HTML inline SVG Icons](http://codepen.io/ruandre/pen/howFi)
 * [Font-Awesome-SVG-PNG](https://github.com/encharm/Font-Awesome-SVG-PNG)
-

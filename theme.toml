@@ -3,7 +3,7 @@ license = "MIT"
 licenselink = "https://github.com/otterpro/apricot-hugo-theme/blob/master/LICENSE.md"
 description = "Easy-to-read blog theme for Hugo"
 homepage = "https://github.com/otterpro/apricot-hugo-theme/"
-tags = ["blog","highlight.js","responsive","google analytics"]
+tags = ["blog","responsive"]
 features = ["blog"]
 min_version = "0.38.2"
 

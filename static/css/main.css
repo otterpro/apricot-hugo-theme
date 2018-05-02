@@ -21,16 +21,66 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
+/* CSS variables */
+
+:root {
+  --base-font-family: "Lucida Grande", Tahoma, Verdana, Roboto, sans-serif;
+  --serif-font-family: Georgia, Times, "Times New Roman", serif;
+  
+  --base-font-size:   16px;
+  --small-font-size:  calc(var(--base-font-size) * 0.875);
+  --base-line-height: 1.5;
+  
+  --spacing-unit:     30px;
+  --left-right-padding: 130px;
+  
+  --text-color:       #000;
+  --background-color: #fdfdfd;
+  --brand-color:      #2a7ae2;
+  --footer-background-color: #ccc;
+  
+  /* // tags and category */
+  --category-text-color: white;
+  /* //$tag-background-color: $brand-color; */
+  /* // LIGHT */
+  /* // $category-background-color: gray; */
+  /* // $tag-background-color: lightgray; */
+  /* // DARK */
+  --tag-background-color: #AAA;
+  --category-background-color: #888;
+  
+  /* Code */
+  --code-font-family: consolas, menlo, monaco, 'andale mono', monospace;
+  --code-font-size: 16px;
+  
+  --header-height: 250px;
+  /* --article-title-padding: 50px 0; */
+  
+  /* Width of the content area */
+  
+  --content-width:   1000px;
+  --max-content-width: 1600px; 
+  
+  --two-column-main-percent: 70%;
+  --two-column-sidebar-percent: 30%;
+  --on-palm:          640px;
+  --on-laptop:        1000px;
+  
+  /* // Twitter, Github, RSS icons (inline SVG) */
+  --social-icon-color: Gray; 
+
+}
+
 /**
  * Basic styling
  */
 body {
-  font-family: "Lucida Grande", Tahoma, Verdana, Roboto, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+  font-family: var(--base-font-family);
+  font-size: var(--base-font-size);
+  line-height: var(--base-line-height);
   font-weight: 400; 
-  color: #000;
-  background-color: #fdfdfd;
+  color: var(--text-color);
+  background-color: var(--background-color);
   -webkit-text-size-adjust: 100%; }
 
 /**
@@ -40,7 +90,7 @@ h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure,
 .highlight {
-  margin-bottom: 15px; }
+  margin-bottom: calc(var(--spacing-unit)/2);}
 
 /**
  * Images
@@ -63,7 +113,7 @@ figcaption {
  * Lists
  */
 ul, ol {
-  margin-left: 30px; }
+  margin-left: var(--spacing-unit); }
 
 li > ul,
 li > ol {
@@ -76,7 +126,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400; }
 
 h1 {
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  font-family: var(--serif-font-family);
+  border-bottom: 1px solid #eee; 
+}
 
 h2 {
   font-size: 1.3rem; }
@@ -93,17 +147,15 @@ h1, h2 {
   margin-top: 1em; }
 
 /* h1, draw line after text */
-h1, h2 {
-  border-bottom: 1px solid #eee; }
 
 /**
  * Links
  */
 a {
-  color: #2a7ae2;
+  color: var(--brand-color);
   text-decoration: none; }
   a:hover {
-    color: #000;
+    color: var(--text-color);
     text-decoration: underline; }
 
 /**
@@ -112,7 +164,7 @@ a {
 blockquote {
   color: Gray;
   border-left: 4px solid LightGray;
-  padding-left: 15px;
+  padding-left: calc(var(--spacing-unit)/2);
   font-size: 18px;
   letter-spacing: -1px;
   font-style: italic; }
@@ -126,7 +178,8 @@ blockquote {
  */
 pre,
 code {
-  font-family: consolas, menlo, monaco, 'andale mono', monospace;
+  font-family: var(--code-font-family);
+  font-size: var(--code-font-size);
   border: 1px solid lightGray;
   border-radius: 3px;
   color: lightGray;
@@ -157,7 +210,7 @@ pre{
   height: 16px;
   vertical-align: middle; }
   .social-icon > svg path {
-    fill: Gray; }
+    fill: var(--social-icon-color); }
 
 /* wraps around main area, including content and sidebar */
 /* responsive */
@@ -168,20 +221,29 @@ main {
 
 aside {
   box-sizing: border-box;
-  margin: 0;
-  padding: 20px; }
+  margin: 1rem;
+  padding: 20px; 
+  padding: 1rem; 
+  background-color: #CAA;
+}
 
 .two-column-content {
-  width: 100; }
+  width: 100%; }
 
+  /* GOOD */
 @media screen and (min-width: 640px) {
   .two-column-content {
-    width: 70%;
+    width: var(--two-column-main-percent);
     float: left; }
 
   aside {
-    width: 30%;
+    width: var(--two-column-sidebar-percent);
     float: left; } }
+
+
+/* Tag Detail page contains multi-column
+ May rename to something else, in case tags are not 2 col
+*/
 .tag-detail {
   -webkit-column-count: 2;
   -moz-column-count: 2;
@@ -189,24 +251,26 @@ aside {
 
 /**
 	Here only for historical reason?
-
  * Wrapper - Original Jekyll wrapperc
 	Useful for main content wrapper
 	* has significant left,right margin 
-
  */
 .wrapper {
-  max-width: 1600px;
+  max-width: var(--max-content-width);
   margin-right: auto;
   margin-left: auto;
-  padding-right: 130px;
-  padding-left: 130px;
+  padding-right: var(--left-right-padding);
+  padding-left: var(--left-right-padding);
   padding-bottom: 1em;
-  /* mobile and small screen */ }
-  @media screen and (max-width: 1000px) {
+}
+
+/* mobile and small screen */ 
+/* @media screen and (max-width: var(--on-laptop)) { */
+@media screen and (max-width: 1000px) { 
     .wrapper {
-      padding-right: 15px;
-      padding-left: 15px; } }
+      padding-right: calc(var(--spacing-unit));
+      padding-left: calc(var(--spacing-unit));  }
+    }
 
 /* Clearfix */
 .wrapper:after, .group:after, .footer-col-wrapper:after {
@@ -220,13 +284,13 @@ aside {
 .site-header {
   min-height: 56px;
   position: relative;
-  height: 250px; }
+  height: var(--header-height); }
 
 .site-header a:link {
   text-decoration: none; }
 
 .site-title {
-  font-family: Georgia, Times, "Times New Roman", serif;
+  font-family: var(--serif-font-family);
   font-size: 3em;
   line-height: 56px;
   letter-spacing: -1px;
@@ -239,6 +303,8 @@ aside {
 
 .article-title-in-header {
   color: white;
+  text-transform: capitalize;
+  font-family: var(--serif-font-family);
   font-size: 1.5em;
   background-color: rgba(0, 0, 0, 0.55);
   text-shadow: 2px 2px 8px black, -2px -2px 8px black; 
@@ -247,7 +313,6 @@ aside {
   left: 0px;
   bottom: 0;
   position: absolute;
-
   text-align: center; }
 
   /*
@@ -263,24 +328,33 @@ aside {
   text-align: center; }
   */
 
+
+/* SITE NAVIGATION */
+/* Laptop */
 .site-nav {
   float: right;
   line-height: 56px; }
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
-    color: #000;
+    color: black ;
     line-height: 1.5;
     text-transform: uppercase;
-    text-shadow: 2px 2px 8px white, -2px -2px 8px white; }
+    /* -webkit-text-stroke: 1px white; */
+    text-shadow: 2px 2px 8px white, -2px -2px 8px white;
+  }
+
     .site-nav .page-link:not(:first-child) {
       margin-left: 20px; }
-  @media screen and (max-width: 640px) {
+
+/* Phone / small screen */
+  /* @media screen and (max-width: var(--on-palm)) { */
+  @media screen and (max-width: 639.9px) {
     .site-nav {
       position: absolute;
       top: 9px;
       right: 30px;
-      background-color: #fdfdfd;
+      background-color: var(--background-color);
       border: 1px solid LightGray;
       border-radius: 5px;
       text-align: right; }
@@ -305,14 +379,16 @@ aside {
         padding-bottom: 5px; }
       .site-nav .page-link {
         display: block;
-        padding: 5px 10px; } }
+        padding: 5px 10px; } 
+      }
 
 /**
  * Site footer
  */
 /* footer except for last line */
 .footer-main {
-  background-color: #ccc;
+  /* background-color: #ccc; */
+  background-color: var(--footer-background-color);
   padding: 20px 20px 0px 20px; }
 
 .tag-list,
@@ -324,21 +400,19 @@ aside {
 .footer-col-wrapper {
   font-size: 15px;
   color: Gray;
-  margin-left: -15px; }
+  margin-left: calc(-1*var(--spacing-unit)/2); /* unfortunately, this is the only way to negate variable */
+  /* margin-left: -15px;  */
+}
 
+/* FOOTER normal - 3 columns -  desktop / laptop / wide-view */
 .footer-col {
   float: left;
   margin-bottom: 15px;
   padding-left: 15px; }
 
-.footer-col-1 {
-  width: 30%; }
-
-.footer-col-2 {
-  width: 30%; }
-
-.footer-col-3 {
-  width: 40%; }
+.footer-col-1 { width: 30%; }
+.footer-col-2 { width: 30%; }
+.footer-col-3 { width: 40%; }
 
 .footer-last-line {
   font-size: .8em;
@@ -346,36 +420,42 @@ aside {
   color: Gray;
   text-align: center; }
 
-.footer-last-line a {
-  color: Gray; }
+.footer-last-line a { color: Gray; }
 
-@media screen and (max-width: 1000px) {
+/* Medium view - footers are 2 column */
+@media screen and (min-width: 400px) and (max-width: 767.9px)  {
   .footer-col-1,
   .footer-col-2 {
-    width: -webkit-calc(50% - (30px / 2));
-    width: calc(50% - (30px / 2)); }
-
+    /* width: -webkit-calc(50% - (30px / 2)); */
+    /* width: calc(50% - (30px / 2)); } */
+    width: -webkit-calc(50% - (var(--spacing-unit) / 2)); 
+    width: calc(50% - (var(--spacing-unit) / 2)); 
+}
   .footer-col-3 {
-    width: -webkit-calc(100% - (30px / 2));
-    width: calc(100% - (30px / 2)); } }
-@media screen and (max-width: 640px) {
+    /* width: -webkit-calc(100% - (30px / 2)); */
+    /* width: calc(100% - (30px / 2));  */
+    width: -webkit-calc(100% - (var(--spacing-unit) / 2)); 
+    width: calc(100% - (var(--spacing-unit) / 2)); 
+  } 
+}
+/* Narrow view - footers are 1 column */
+@media screen and (max-width: 399px) {
   .footer-col {
     float: none;
-    width: -webkit-calc(100% - (30px / 2));
-    width: calc(100% - (30px / 2)); } }
+    width: -webkit-calc(100% - (var(--spacing-unit) / 2)); 
+    width: calc(100% - (var(--spacing-unit) / 2)); 
+  } 
+}
 /**
  * 
  */
 /* content area, main text */
 
-article {
-  font-size: 1em;
+article { font-size: 1em;
 }
 .article-meta {
   font-size: 14px;
   color: Gray; }
-
-
 
 /* NOT USED??? */
 /* partially based on http://www.wpbeginner.com/wp-themes/how-to-add-numeric-pagination-in-your-wordpress-theme/  */
@@ -426,9 +506,9 @@ a.category {
   text-transform: uppercase;
   display: inline-block;
   vertical-align: .3em;
-  color: white;
-  background-color: #888;
-  background-color: #888; }
+  color: var(--category-text-color);
+  background-color: var(--category-background-color);
+  }
 
 a.tag {
   padding: 0 .3em;
@@ -439,6 +519,23 @@ a.tag {
   text-transform: uppercase;
   display: inline-block;
   vertical-align: .3em;
-  color: white;
-  background-color: #888;
-  background-color: #AAA; }
+  color: var(--category-text-color);
+  background-color: var(--tag-background-color);
+  }
+
+
+/* Youtube embed responsive */
+	.video-wrapper {
+		position: relative;
+		padding-bottom: 56.25%; /* 16:9 */
+		padding-top: 25px;
+		height: 0;
+	}
+	.video-wrapper iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+  

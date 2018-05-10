@@ -1,75 +1,125 @@
-/**
- * TODO: use CSS Variables
- * TODO: use modern CSS
- * TODO: use unCSS or FF tool to find what which ones are not being used
- */
-
-/**
- * Reset some basic elements
- */
-body, h1, h2, h3, h4, h5, h6,
-p, blockquote, pre, hr,
-dl, dd, ol, ul, figure {
-  margin: 0;
-  padding: 0; }
-
-/* enable sane box model */
-/* https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
-html {
-  box-sizing: border-box; }
-
-*, *:before, *:after {
-  box-sizing: inherit; }
-
 /* CSS variables */
-
 :root {
   --base-font-family: "Lucida Grande", Tahoma, Verdana, Roboto, sans-serif;
   --serif-font-family: Georgia, Times, "Times New Roman", serif;
   
-  --base-font-size:   16px;
+  --base-font-size:   100%; /* 16px */
   --small-font-size:  calc(var(--base-font-size) * 0.875);
-  --base-line-height: 1.5;
+  --base-line-height: 1.5; /* bootstrap 4 = 1.15/1.5x, normalize = 1.15x (feels too small)*/
   
+
+  /* padding */
   --spacing-unit:     30px;
-  --left-right-padding: 130px;
+  /* --left-right-padding: 130px; */
+  --left-right-padding: 20px;
   
   --text-color:       #000;
-  --background-color: #fdfdfd;
-  --brand-color:      #2a7ae2;
-  --footer-background-color: #ccc;
+  --quote-color:    gray;
+  --quote-margin-color: gray;
+  /* --quote-bg-color: rgba(0,0,0,.1) ; */
+  --quote-bg-color: rgba(0,0,0,.1);
   
-  /* // tags and category */
+  --bg-color: #fdfdfd;
+  /* --brand-color:      #2a7ae2; */
+  /* --primary-color:      #2a7ae2; */
+  /* --primary-light-color: #99b9e2; */
+  --primary-color:     hsl(214,76%,53%) ;
+  --primary-light-color: hsl(214,76%,95%);
+  
+  --footer-bg-color: #ccc;
+  
+  /* tags and category */
   --category-text-color: white;
-  /* //$tag-background-color: $brand-color; */
+  /* //$tag-bg-color: $brand-color; */
   /* // LIGHT */
-  /* // $category-background-color: gray; */
+  /* // $category-bg-color: gray; */
   /* // $tag-background-color: lightgray; */
   /* // DARK */
-  --tag-background-color: #AAA;
-  --category-background-color: #888;
+  --tag-bg-color: #AAA;
+  --category-bg-color: #888;
   
   /* Code */
   --code-font-family: consolas, menlo, monaco, 'andale mono', monospace;
   --code-font-size: 16px;
   
-  --header-height: 250px;
+  /* --header-height: 250px; */
+  --header-height: 25vmin; /* scalable */
+  /* if vmin causes problem, switch to calc(16px + 1vw) */
+
   /* --article-title-padding: 50px 0; */
-  
+
+  /* make site title scale with resolution, with maximum of 5% */
+  /* --site-title-font-size: 3em;   */
+  --site-title-font-size: 5vmin;  /* was 3em */
+  /* if vmin causes problem, switch to calc(16px+1vw) */
+
   /* Width of the content area */
+  /* no longer used */
+  /* --content-width:   1000px;  */
+  /* --max-content-width: 1600px; */
   
-  --content-width:   1000px;
-  --max-content-width: 1600px; 
-  
+  /* --two-column-main-percent: 70%; */
   --two-column-main-percent: 70%;
   --two-column-sidebar-percent: 30%;
-  --on-palm:          640px;
-  --on-laptop:        1000px;
+
+  /* not used, as it is hard-coded below */
+  /* --on-palm:          640px; */
+
+  /* not used, as it is hard-coded below */
+  /* --on-laptop:        1000px;  */
   
   /* // Twitter, Github, RSS icons (inline SVG) */
   --social-icon-color: Gray; 
 
 }
+/**
+ * CSS Reset some basic elements
+ */
+/* body, h1, h2, h3, h4, h5, h6, */
+/* p, blockquote, pre, hr, */
+/* dl, dd, ol, ul, figure { */
+/*   margin: 0; */
+/*   padding: 0; } */
+
+/* CSS Reset - based on Meyer's CSS Reset */
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+  /* ol, ul { list-style: none; } */
+
+	blockquote, q { quotes: none; }
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+/* enable sane box model */
+/* https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
 
 /**
  * Basic styling
@@ -78,19 +128,27 @@ body {
   font-family: var(--base-font-family);
   font-size: var(--base-font-size);
   line-height: var(--base-line-height);
-  font-weight: 400; 
+  font-weight: normal; /* 400 */
   color: var(--text-color);
-  background-color: var(--background-color);
-  -webkit-text-size-adjust: 100%; }
+  background-color: var(--bg-color);
+  -webkit-text-size-adjust: 100%; 
+
+  min-width: 320px; 
+}
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
+ * Disabled - currently to make it more compact
+ * usually it's about 15px margin...
  */
+/*
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure,
 .highlight {
-  margin-bottom: calc(var(--spacing-unit)/2);}
+  margin-bottom: calc(var(--spacing-unit)/2);
+}
+*/
 
 /**
  * Images
@@ -123,13 +181,15 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 400; }
+  font-weight: normal; /* 400;*/ 
+}
 
 h1 {
   font-size: 1.5rem;
   text-transform: capitalize;
   font-family: var(--serif-font-family);
   border-bottom: 1px solid #eee; 
+  /* font-weight: bold; */
 }
 
 h2 {
@@ -152,7 +212,8 @@ h1, h2 {
  * Links
  */
 a {
-  color: var(--brand-color);
+  /* color: var(--brand-color); */
+  color: var(--primary-color);
   text-decoration: none; }
   a:hover {
     color: var(--text-color);
@@ -162,14 +223,80 @@ a {
  * Blockquotes
  */
 blockquote {
-  color: Gray;
-  border-left: 4px solid LightGray;
+  color: var(--quote-color);
+  /* background-color: var(--primary-light-color); */
+  background-color: var(--quote-bg-color);
+  /* border-left: 4px solid var(--quote-margin-color); */
+  /* font-size: 18px; */
+  /* letter-spacing: -1px; */
+  font-style: italic; 
+  border-radius: 5px;
+  /* padding-left: calc(var(--spacing-unit)/2); */
+  /* padding-right: calc(var(--spacing-unit)/2); */
+
+  /* OLD */
+  /* padding-left: 0px; */
+  
+}
+  blockquote > :last-child { margin-bottom: 0; } 
+
+/* element after 1-blockquote only */
+:not(blockquote) > blockquote >:not(blockquote)  {
   padding-left: calc(var(--spacing-unit)/2);
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic; }
-  blockquote > :last-child {
-    margin-bottom: 0; }
+  padding-right: calc(var(--spacing-unit)/2);
+}
+/* elements after 2-blockquotes only */
+:not(blockquote) > blockquote > blockquote >:not(blockquote) {
+  padding-left: calc(var(--spacing-unit)/2);
+  padding-right: calc(var(--spacing-unit)/2);
+}
+/* special case: 3 blockquotes indicate special aside */
+:not(blockquote) > blockquote > blockquote > blockquote {
+/* blockquote:nth-child(3) { */
+  /* background-color: var(--brand-color); */
+  /* brand-color was too dark, so lighter version of it */
+  background-color: var(--primary-light-color);
+  border: 1px solid var(--primary-color);
+  font-style: normal; 
+  color: var(--text-color);
+  /* padding-right: 1rem; */
+  /* float: right; */
+  /* width: 40%; */
+  /* clear: right; */
+  /* margin: 1px; */
+  border-radius: 5px;
+}
+/**
+ * Definition list
+ * Used similar to AsciiDoc's admonition
+ */
+dl {
+  /* margin: 1rem; */
+  padding: 1rem;
+  background-color: var(--primary-light-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  display:block;
+}
+dt {
+  /* float: left; */
+  /* width: 3rem; */
+
+  /* clear: left; */
+  /* text-align: right; */
+  /* font-weight: bold; */
+  /* font-size: 2.5rem; */
+}
+dd {
+  /* margin: 0 0 0 3rem; */
+  padding-left: 1em;
+  /* border-width: 1px; */
+  border-left-width: 1em;
+  border-color: var(--primary-color);
+  border-style: ridge;
+  /* not needed? */
+  /* padding: 0 0 0.5em 0; */
+}
 
 /**
  * Code formatting
@@ -181,16 +308,19 @@ code {
   font-family: var(--code-font-family);
   font-size: var(--code-font-size);
   border: 1px solid lightGray;
-  border-radius: 3px;
+  border-radius: 5px;
   color: lightGray;
   padding: 8px 12px;
   overflow-x: auto;
   white-space: pre-wrap; /* enable word-wrap  */
-  background-color: #222;
+  /* background-color: #222; */
+  background-color: initial; /* allow Chroma/pygment color to show and not be overriden */
   }
 
 code{
-  padding: 1px 5px; }
+  background-color: #444;
+  padding: 1px 3px;
+}
 
 pre{
 }
@@ -198,7 +328,8 @@ pre{
     border: 0;
     background-color: initial; /* allow Chroma/pygment color to show and not be overriden */
     padding-right: 0;
-    padding-left: 0; }
+    padding-left: 0; 
+  }
 
 /**
  * Icons
@@ -214,32 +345,111 @@ pre{
 
 /* wraps around main area, including content and sidebar */
 /* responsive */
+/* default, including phone, narrow layout */
 main {
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px; }
+    width: 100%;
+    /* temp testing*/
+    /* background-color: green; */
+    
+}
+    
 
 aside {
   box-sizing: border-box;
   margin: 1rem;
-  padding: 20px; 
+  /* padding: 20px;  */
   padding: 1rem; 
-  background-color: #CAA;
+  background-color: #FEF;
+  border-radius: 20px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
 .two-column-content {
   width: 100%; }
 
-  /* GOOD */
+/* NORMAL layout, make it 2 column */
 @media screen and (min-width: 640px) {
+  /* TODO: arbitrary for now */
+  :root {
+    --left-right-padding: 120px;
+  }
+  
+  main {
+    /* width: 100%; */
+
+    /* this is set in wrapper */
+    /* margin: 0 auto; */
+
+    padding: 20px;
+
+    /* temp testing*/
+    /* width: 70%; */
+    
+  }
+  
   .two-column-content {
     width: var(--two-column-main-percent);
-    float: left; }
+    /* float: left; */
+  }
 
   aside {
     width: var(--two-column-sidebar-percent);
-    float: left; } }
+    /* Move the floated box higher, looks better especially if it's on right side */
+    position: relative;
+    /* move floated box higher */
+    top: -100px; 
+    margin-top: 100px;  
+    /* increase top margin to match above*/
+    /* remove excess space below, since box moved higher up */
+    /* margin-bottom: -150px;  */
+    width: 30%;
+    float: right;
+    box-sizing: content-box;
+  } 
+  
+  /* show indentations with various depths */
+  blockquote {
+    /* background-color: yellow; */
+    border-left: 4px solid var(--quote-margin-color);
+    padding-left: calc(var(--spacing-unit)/2);
+    padding-right: calc(var(--spacing-unit)/2);
+  }
 
+  /* element after 1-blockquote only */
+  /* :not(blockquote) > blockquote >:not(blockquote)  { */
+  /* :not(blockquote) > blockquote:only-of-type { */
+  blockquote:only-of-type {
+    /* background-color:green; */
+    /* padding-left: calc(var(--spacing-unit)/2); */
+    /* padding-right: calc(var(--spacing-unit)/2); */
+  }
+
+  /* elements after 2-blockquotes only */
+  /* :not(blockquote) > blockquote > blockquote >:not(blockquote) { */
+  :not(blockquote) > blockquote > blockquote:last-of-type {
+    /* background-color:purple; */
+    /* padding-right: calc(var(--spacing-unit)/2); */
+  }
+
+  /* special case: 3 blockquotes indicate special aside */
+  /* make it float right */
+  :not(blockquote) > blockquote > blockquote > blockquote {
+    /* background-color: red; */
+    float: right;
+    width: 30%;
+    clear: right;
+
+    /* compensate for the right padding from previous 2 blockquotes */
+    /* by moving it right to offset the x position */
+    /* works only in relative */
+    position: relative;
+    right: calc(-1*var(--spacing-unit)); 
+    /*
+    position: absolute;
+    right: 0; 
+    */
+  }
+}
 
 /* Tag Detail page contains multi-column
  May rename to something else, in case tags are not 2 col
@@ -250,27 +460,38 @@ aside {
   column-count: 2; }
 
 /**
-	Here only for historical reason?
  * Wrapper - Original Jekyll wrapperc
-	Useful for main content wrapper
-	* has significant left,right margin 
+	Useful for <main>...</main> content wrapper
+	has significant left,right margin
  */
 .wrapper {
-  max-width: var(--max-content-width);
+  /* max-width: var(--max-content-width); */
+  /* min-width: 320px;  */
+  /* 320px is considered minimum for modern devices */
+
+  /* disabled auto margin for now, so that I can fit second column on right 
+   * for occassional float boxes
+   * 70% main, 30% float/right
+   */
   margin-right: auto;
   margin-left: auto;
+
   padding-right: var(--left-right-padding);
   padding-left: var(--left-right-padding);
   padding-bottom: 1em;
+  /* background-color: green; */
 }
 
 /* mobile and small screen */ 
 /* @media screen and (max-width: var(--on-laptop)) { */
-@media screen and (max-width: 1000px) { 
-    .wrapper {
-      padding-right: calc(var(--spacing-unit));
-      padding-left: calc(var(--spacing-unit));  }
-    }
+/* var doesn't work on @media in CSS yet  */
+/* @media screen and (max-width: 1000px) {  */
+/*  */
+/*     .wrapper { */
+/*       padding-right: calc(var(--spacing-unit)); */
+/*       padding-left: calc(var(--spacing-unit));  } */
+/*  */
+/*     } */
 
 /* Clearfix */
 .wrapper:after, .group:after, .footer-col-wrapper:after {
@@ -282,7 +503,7 @@ aside {
  * Site header
  */
 .site-header {
-  min-height: 56px;
+  /* min-height: 56px; */
   position: relative;
   height: var(--header-height); }
 
@@ -291,11 +512,12 @@ aside {
 
 .site-title {
   font-family: var(--serif-font-family);
-  font-size: 3em;
-  line-height: 56px;
-  letter-spacing: -1px;
+  font-size: var(--site-title-font-size);
+  /* line-height: 56px; */
+  letter-spacing: -1px; /* compact spacing between letters */
   margin-bottom: 0;
-  float: left;
+  float: left;  /* title on left side of image banner */
+  vertical-align: top; /* try to keep site title aligned to top, looks more natural */
   text-shadow: 2px 2px 8px black, -2px -2px 8px black; }
 
   .site-title, .site-title:visited {
@@ -354,7 +576,7 @@ aside {
       position: absolute;
       top: 9px;
       right: 30px;
-      background-color: var(--background-color);
+      background-color: var(--bg-color);
       border: 1px solid LightGray;
       border-radius: 5px;
       text-align: right; }
@@ -388,7 +610,7 @@ aside {
 /* footer except for last line */
 .footer-main {
   /* background-color: #ccc; */
-  background-color: var(--footer-background-color);
+  background-color: var(--footer-bg-color);
   padding: 20px 20px 0px 20px; }
 
 .tag-list,
@@ -507,7 +729,7 @@ a.category {
   display: inline-block;
   vertical-align: .3em;
   color: var(--category-text-color);
-  background-color: var(--category-background-color);
+  background-color: var(--category-bg-color);
   }
 
 a.tag {
@@ -520,7 +742,7 @@ a.tag {
   display: inline-block;
   vertical-align: .3em;
   color: var(--category-text-color);
-  background-color: var(--tag-background-color);
+  background-color: var(--tag-bg-color);
   }
 
 

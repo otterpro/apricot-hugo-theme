@@ -7,6 +7,17 @@ Apricot is a theme for blogs. Originally created for Jekyll, I migrated my blog 
 * Easy to read style, with high contrast and large fonts
 * Stylish Table of Contents (not finished yet / coming soon)
 
+## Special Notes
+
+You can create a graphically formatted note (caution), warning, info or tip box.
+
+	Tip
+	: There is a better way to do this.
+
+Floating box similar to `aside`.
+
+	>>> Place text here...
+
 ## Pre-requisite
 * Install Hugo on your computer.
 

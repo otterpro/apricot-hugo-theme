@@ -7,34 +7,39 @@
   --small-font-size:  calc(var(--base-font-size) * 0.875);
   --base-line-height: 1.5; /* bootstrap 4 = 1.15/1.5x, normalize = 1.15x (feels too small)*/
   
-
   /* padding */
   --spacing-unit:     30px;
-  /* --left-right-padding: 130px; */
-  --left-right-padding: 20px;
+  --left-right-padding: 1em; /* was 130px */
   
-  --text-color:       #000;
+
+  /* BLOCKQUOTE box */
   --quote-color:    gray;
   --quote-margin-color: gray;
-  /* --quote-bg-color: rgba(0,0,0,.1) ; */
   --quote-bg-color: rgba(0,0,0,.1);
   
+  /* main COLORS */
+  --text-color:       #000;
   --bg-color: #fdfdfd;
   /* --brand-color:      #2a7ae2; */
   /* --primary-color:      #2a7ae2; */
   /* --primary-light-color: #99b9e2; */
-  --primary-color:     hsl(214,76%,53%) ;
-  --primary-light-color: hsl(214,76%,95%);
+  /* --primary-color:     hsl(214,76%,53%) ; */
+  /* --primary-light-color: hsl(214,76%,95%); */
+  /* --primary-dark-color: hsl(214,76%,25%); */
+
+  /* new darker blue: #0e0e8e */
+  --primary-color: hsl(240,82%,31%);
+  --primary-light-color: hsl(240,82%,95%);
+  --primary-dark-color: hsl(240,82%,11%);
   
   --footer-bg-color: #ccc;
   
+  /* columns  */
+  --two-column-main-width: 70%;
+  --two-column-sidebar-width: 35%;
+
   /* tags and category */
   --category-text-color: white;
-  /* //$tag-bg-color: $brand-color; */
-  /* // LIGHT */
-  /* // $category-bg-color: gray; */
-  /* // $tag-background-color: lightgray; */
-  /* // DARK */
   --tag-bg-color: #AAA;
   --category-bg-color: #888;
   
@@ -58,10 +63,6 @@
   /* --content-width:   1000px;  */
   /* --max-content-width: 1600px; */
   
-  /* --two-column-main-percent: 70%; */
-  --two-column-main-percent: 70%;
-  --two-column-sidebar-percent: 30%;
-
   /* not used, as it is hard-coded below */
   /* --on-palm:          640px; */
 
@@ -70,6 +71,11 @@
   
   /* // Twitter, Github, RSS icons (inline SVG) */
   --social-icon-color: Gray; 
+
+  /* set in html */
+  /* --TOC-text-hide: "...[hide]"; */
+  /* --TOC-text-show: "...[show]"; */
+  --TOC-text: "";
 
 }
 /**
@@ -132,7 +138,6 @@ body {
   color: var(--text-color);
   background-color: var(--bg-color);
   -webkit-text-size-adjust: 100%; 
-
   min-width: 320px; 
 }
 
@@ -216,7 +221,7 @@ a {
   color: var(--primary-color);
   text-decoration: none; }
   a:hover {
-    color: var(--text-color);
+    color: var(--primary-dark-color);
     text-decoration: underline; }
 
 /**
@@ -229,16 +234,20 @@ blockquote {
   /* border-left: 4px solid var(--quote-margin-color); */
   /* font-size: 18px; */
   /* letter-spacing: -1px; */
+  /* padding-right: calc(var(--spacing-unit)/2); */
   font-style: italic; 
   border-radius: 5px;
-  /* padding-left: calc(var(--spacing-unit)/2); */
-  /* padding-right: calc(var(--spacing-unit)/2); */
+
+  border-left: 4px solid var(--quote-margin-color);
+  /* remove - Looked ugly for sidebar */
+  padding-left: calc(var(--spacing-unit)/2);
+  /* border-left: 4px solid var(--quote-margin-color); */
 
   /* OLD */
   /* padding-left: 0px; */
   
 }
-  blockquote > :last-child { margin-bottom: 0; } 
+  /* blockquote > :last-child { margin-bottom: 0; }  */
 
 /* element after 1-blockquote only */
 :not(blockquote) > blockquote >:not(blockquote)  {
@@ -251,21 +260,84 @@ blockquote {
   padding-right: calc(var(--spacing-unit)/2);
 }
 /* special case: 3 blockquotes indicate special aside */
-:not(blockquote) > blockquote > blockquote > blockquote {
-/* blockquote:nth-child(3) { */
-  /* background-color: var(--brand-color); */
+/* for column on the right side */
+:not(blockquote) > blockquote > blockquote > blockquote, #TableOfContents, #TOC-header, #TOC-button {
   /* brand-color was too dark, so lighter version of it */
   background-color: var(--primary-light-color);
   border: 1px solid var(--primary-color);
   font-style: normal; 
   color: var(--text-color);
-  /* padding-right: 1rem; */
-  /* float: right; */
-  /* width: 40%; */
-  /* clear: right; */
-  /* margin: 1px; */
+  /* padding-right: 1rem;  float: right;  width: 40%;  clear: right;  margin: 1px; */
   border-radius: 5px;
+  margin-left: calc(var(--spacing-unit)/2);
+  margin-bottom: 0.5em;
+  
+  /* margin-right: calc(var(--spacing-unit)/2); */
+  padding-left: calc(var(--spacing-unit)/2);
+  padding-right: calc(var(--spacing-unit)/2);
 }
+
+/* Table of Contents TOC styling */
+
+/* Hide all TOC item H3-H6 */
+/* this was the only way to hide TOC H3-H6 because it was not configurable in Hugo TOC */
+#TableOfContents > ul > li > ul > li > ul  * { display: none; }
+
+/* fix problem where h3-h6 exists without h1,h2 - orphan lists */
+/* this highlights problem h3-h6 */
+#TableOfContents > ul > li > ul > li > ul {background-color: red; }
+
+#TableOfContents > ul { color: var(--primary-color);}
+#TableOfContents > ul { list-style-type: decimal;}
+#TableOfContents > ul > li > ul { list-style-type: lower-alpha;}
+
+#TableOfContents::before {
+  font-family: var(--serif-font-family);
+  /* border-bottom: 1px solid black; */
+  /* color: var(--primary-color); */
+  font-weight: bold;
+  /* content: "Table of Contents"; */
+}
+
+#TableOfContents {
+  border-radius: 0px;
+  /* border-top-width: 0px; */
+  margin-top: 0px;
+  /* padding-top: 0px; */
+}
+
+/* #TOC-header { */
+/*   margin-bottom: 0px; */
+/*   padding-top: 0px; */
+/*   border-bottom-width: 2px; */
+/*   border-radius: 0px; */
+/* } */
+
+#TOC-button {
+  /* border:0; */
+  font-family: var(--serif-font-family);
+  font-size: 1em;
+  font-style: normal; 
+  color: var(--primary-light-color);
+  background-color: var(--primary-color);
+  /* color: var(--text-color); */
+  /* background-color: var(--primary-light-color); */
+  border-bottom-width: 0px ;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  /* border-bottom-width: 2px; */
+  border-radius: 0px;
+  /* border: 1px solid var(--primary-color); */
+}
+#TOC-button::after {
+  /* font-family: var(--serif-font-family); */
+  /* border-bottom: 1px solid black; */
+  /* color: var(--primary-color); */
+  font-size: 10px;
+  content:  var(--TOC-text);
+  
+}
+
 /**
  * Definition list
  * Used similar to AsciiDoc's admonition
@@ -351,6 +423,15 @@ main {
     /* temp testing*/
     /* background-color: green; */
     
+  margin-right: auto;
+  margin-left: auto;
+
+  /* padding-left: var(--left-right-padding); */
+  /* padding-right: var(--left-right-padding); */
+
+  /* padding-left: calc(var(--left-right-padding) + 2%); */
+  /* padding-right: calc(var(--left-right-padding) + 2%); */
+  padding: 1em calc(var(--left-right-padding) + 2%);
 }
     
 
@@ -367,11 +448,11 @@ aside {
 .two-column-content {
   width: 100%; }
 
-/* NORMAL layout, make it 2 column */
+/*********************** NORMAL layout, make it 2 column ********************/
 @media screen and (min-width: 640px) {
   /* TODO: arbitrary for now */
   :root {
-    --left-right-padding: 120px;
+    /* --left-right-padding: 120px; */
   }
   
   main {
@@ -380,7 +461,7 @@ aside {
     /* this is set in wrapper */
     /* margin: 0 auto; */
 
-    padding: 20px;
+    /* padding: 20px; */
 
     /* temp testing*/
     /* width: 70%; */
@@ -388,12 +469,12 @@ aside {
   }
   
   .two-column-content {
-    width: var(--two-column-main-percent);
+    width: var(--two-column-main-width);
     /* float: left; */
   }
 
   aside {
-    width: var(--two-column-sidebar-percent);
+    width: var(--two-column-sidebar-width); /* width: 30%; */
     /* Move the floated box higher, looks better especially if it's on right side */
     position: relative;
     /* move floated box higher */
@@ -402,53 +483,61 @@ aside {
     /* increase top margin to match above*/
     /* remove excess space below, since box moved higher up */
     /* margin-bottom: -150px;  */
-    width: 30%;
     float: right;
     box-sizing: content-box;
   } 
   
   /* show indentations with various depths */
   blockquote {
-    /* background-color: yellow; */
-    border-left: 4px solid var(--quote-margin-color);
-    padding-left: calc(var(--spacing-unit)/2);
-    padding-right: calc(var(--spacing-unit)/2);
-  }
-
-  /* element after 1-blockquote only */
-  /* :not(blockquote) > blockquote >:not(blockquote)  { */
-  /* :not(blockquote) > blockquote:only-of-type { */
-  blockquote:only-of-type {
-    /* background-color:green; */
     /* padding-left: calc(var(--spacing-unit)/2); */
     /* padding-right: calc(var(--spacing-unit)/2); */
+
+    /* border-left: 4px solid var(--quote-margin-color); */
+    /* width: 69%; */
   }
 
-  /* elements after 2-blockquotes only */
-  /* :not(blockquote) > blockquote > blockquote >:not(blockquote) { */
-  :not(blockquote) > blockquote > blockquote:last-of-type {
+  /* Currently not possible to select element except child with same element */
+  /* :not(blockquote) > blockquote:??? { */
+  /*   background-color:green; */
+  /*   padding-left: calc(var(--spacing-unit)/2); */
+  /*   padding-right: calc(var(--spacing-unit)/2); */
+  /*   border-left: 4px solid var(--quote-margin-color); */
+  /*   padding-left: calc(var(--spacing-unit)/2); */
+  /*   padding-right: calc(var(--spacing-unit)/2); */
+  /* } */
+
+  /* 2 blockquotes only */
+  :not(blockquote) > blockquote_OLD2 > blockquote:last-of-type {
     /* background-color:purple; */
     /* padding-right: calc(var(--spacing-unit)/2); */
+
+    border-left: 4px solid var(--quote-margin-color);
+    /* padding-left: calc(var(--spacing-unit)/2); */
   }
 
   /* special case: 3 blockquotes indicate special aside */
   /* make it float right */
-  :not(blockquote) > blockquote > blockquote > blockquote {
+  :not(blockquote) > blockquote > blockquote > blockquote, #TableOfContents {
     /* background-color: red; */
     float: right;
-    width: 30%;
-    clear: right;
+    width: var(--two-column-sidebar-width); /*30%;*/
+    clear: both;
+    /* padding-left: calc(var(--spacing-unit)/2); */
+    /* padding-right: calc(var(--spacing-unit)/2); */
 
-    /* compensate for the right padding from previous 2 blockquotes */
-    /* by moving it right to offset the x position */
-    /* works only in relative */
-    position: relative;
-    right: calc(-1*var(--spacing-unit)); 
-    /*
-    position: absolute;
-    right: 0; 
-    */
   }
+  /* special case: 3 blockquotes indicate special aside */
+  /* make it float right */
+  :not(blockquote) > blockquote2 > blockquote > blockquote, #TableOfContents, #TOC-button{
+    /* background-color: red; */
+    float: right;
+    width: var(--two-column-sidebar-width); /*30%;*/
+    clear: both;
+    /* padding-left: calc(var(--spacing-unit)/2); */
+    /* padding-right: calc(var(--spacing-unit)/2); */
+
+  }
+  
 }
 
 /* Tag Detail page contains multi-column
@@ -464,7 +553,7 @@ aside {
 	Useful for <main>...</main> content wrapper
 	has significant left,right margin
  */
-.wrapper {
+.wrapper_OLD {
   /* max-width: var(--max-content-width); */
   /* min-width: 320px;  */
   /* 320px is considered minimum for modern devices */
@@ -493,11 +582,9 @@ aside {
 /*  */
 /*     } */
 
-/* Clearfix */
-.wrapper:after, .group:after, .footer-col-wrapper:after {
-  content: "";
-  display: table;
-  clear: both; }
+/* Clearfix - modern version IE8+ */
+.wrapper:after, .group:after, .footer-col-wrapper:after, .main:after {
+  content: ""; display: table; clear: both; }
 
 /**
  * Site header
@@ -761,3 +848,4 @@ a.tag {
 		height: 100%;
 	}
   
+

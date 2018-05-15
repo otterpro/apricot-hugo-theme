@@ -25,7 +25,8 @@
     {{ partial "header" . }}
     {{ partialCached "nav" . }}
     
-    <main class="wrapper">
+    <!-- <main class="wrapper"> -->
+    <main>
       {{ block "main" . }}
       <!-- override in other pages -->
       {{ end }}

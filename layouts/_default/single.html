@@ -6,9 +6,68 @@
 {{ partial "article_meta" . }}
 
 <div class="content">
+{{ if (ne .Params.toc false) }}
+<!-- <h4 class="TOC&#45;header">Table of Contents</h4> -->
+<!-- <button onclick="toggle_visibility('TableOfContents');">Show/Hide</button> -->
+
+<!-- <h4 id="TOC&#45;header">Table of Contents</h4> -->
+<br />
+<!-- <span id="TOC&#45;header"> -->
+<button id="TOC-button" onclick="toggle_visibility('TableOfContents');">Table of Contents</button>
+<!-- <button id="TOC&#45;button" onclick="toggle_TOC();">Table of Contents</button> -->
+<!-- </span> -->
+  {{ .TableOfContents }}
+<script type="text/javascript">
+  
+  function show_TOC_text() {
+      // toggle visiblity and return the element
+       var e = document.getElementById('TableOfContents');
+      var root = document.querySelector(':root');
+    
+      if(e.style.display == 'none') {
+          // e.style.display = 'none';
+        // set CSS variable, faster than doing getElementById on TOC-button
+        root.style.setProperty('--TOC-text', '"...[show]"');
+      }
+      else {
+          // e.style.display = 'block';
+        // set CSS variable, faster than doing getElementById on TOC-button
+        root.style.setProperty('--TOC-text', '"...[hide]"');
+      }
+  }
+
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+      var root = document.querySelector(':root');
+      if(e.style.display == 'none') {
+          e.style.display = 'block';
+        // set CSS variable, faster than doing getElementById on TOC-button
+        root.style.setProperty('--TOC-text', '"...[hide]"');
+      }
+      else {
+          e.style.display = 'none';
+        // set CSS variable, faster than doing getElementById on TOC-button
+        root.style.setProperty('--TOC-text', '"...[show]"');
+      }
+    }
+    
+  // function toggle_TOC() {
+  //   toggle_visibility('TableOfContents');
+  //   show_TOC_text(e);
+  // }
+	if (document.readyState !== 'loading') { show_TOC_text(); }
+  else { document.addEventListener('DOMContentLoaded', show_TOC_text); }
+  
+</script>
+  
+{{ end }} 
+
   {{ .Content }}
+
 </div>
 </article>
+
+
 
 {{ partial "disqus" . }}
 

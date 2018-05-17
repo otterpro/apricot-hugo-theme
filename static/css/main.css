@@ -430,7 +430,6 @@ main {
   padding: 1em calc(var(--left-right-padding) + 2%);
 }
     
-
 aside {
   box-sizing: border-box;
   margin: 1rem;
@@ -523,11 +522,12 @@ aside {
   /* display: block; */
   }
 
-  #TOC-button {
-  }
   /* at wide view, always start with showing TOC */
-  :root {
-    --TOC-display: block; 
+  /* no longer using variable. Instead, using js directly to show/hide */
+  /* :root { --TOC-display: block; }  */
+
+  #TableOfContents {
+    display: block;
   }
 
   /* special case: 3 blockquotes indicate special aside */
@@ -539,9 +539,7 @@ aside {
     clear: both;
     /* padding-left: calc(var(--spacing-unit)/2); */
     /* padding-right: calc(var(--spacing-unit)/2); */
-
   }
-  
 }
 
 /* Tag Detail page contains multi-column
@@ -561,14 +559,12 @@ aside {
   /* max-width: var(--max-content-width); */
   /* min-width: 320px;  */
   /* 320px is considered minimum for modern devices */
-
   /* disabled auto margin for now, so that I can fit second column on right 
    * for occassional float boxes
    * 70% main, 30% float/right
    */
   margin-right: auto;
   margin-left: auto;
-
   padding-right: var(--left-right-padding);
   padding-left: var(--left-right-padding);
   padding-bottom: 1em;

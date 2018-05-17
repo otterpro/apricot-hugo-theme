@@ -7,57 +7,48 @@
 
 <div class="content">
 {{ if (ne .Params.toc false) }}
-<!-- <h4 class="TOC&#45;header">Table of Contents</h4> -->
-<!-- <button onclick="toggle_visibility('TableOfContents');">Show/Hide</button> -->
 
-<!-- <h4 id="TOC&#45;header">Table of Contents</h4> -->
 <br />
-<!-- <span id="TOC&#45;header"> -->
-<button id="TOC-button" onclick="toggle_visibility('TableOfContents');">Table of Contents</button>
-<!-- <button id="TOC&#45;button" onclick="toggle_TOC();">Table of Contents</button> -->
-<!-- </span> -->
+<button id="TOC-button" onclick="toggleTocIfNeeded(true);">Table of Contents</button>
   {{ .TableOfContents }}
 <script type="text/javascript">
-  
-  function show_TOC_text() {
-      // toggle visiblity and return the element
-       var e = document.getElementById('TableOfContents');
-      var root = document.querySelector(':root');
-    
-      if(e.style.display == 'none') {
-          // e.style.display = 'none';
-        // set CSS variable, faster than doing getElementById on TOC-button
-        root.style.setProperty('--TOC-text', '"...[show]"');
-      }
-      else {
-          // e.style.display = 'block';
-        // set CSS variable, faster than doing getElementById on TOC-button
-        root.style.setProperty('--TOC-text', '"...[hide]"');
-      }
-  }
+  /*  
+  * Show or hide TOC if needed, or just show the proper button text according to visibility 
+   * i.e. either show "hide" or "show" button
+   * @isToggle {bool}: true = toggle the visibility of TOC, and display status
+   *                  false = just display the current visibility status on text
+   */
+  function toggleTocIfNeeded(isToggle) {
+    const ELEMENT_ID='TableOfContents';
+    const CSS_VAR_TOC_TEXT='--TOC-text';
+    const HIDE_TEXT ='"...[hide]"';
+    const SHOW_TEXT ='"...[show]"';
 
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-      var root = document.querySelector(':root');
-      if(e.style.display == 'none') {
-          e.style.display = 'block';
-        // set CSS variable, faster than doing getElementById on TOC-button
-        root.style.setProperty('--TOC-text', '"...[hide]"');
+    var e = document.getElementById(ELEMENT_ID);
+    var root = document.querySelector(':root');
+    // if it is explicitly `none`, then it is hidden. Else, assume it is visible
+    // var tocDisplay = getComputedStyle(document.getElementById('TableOfContents'))
+    var tocDisplay = getComputedStyle(e).getPropertyValue("display");
+    // console.log("display:", tocDisplay);
+    if (isToggle) {
+      if(tocDisplay != 'block') {
+        e.style.display = 'block';
+        // setTocButtonText(false) ;
       }
       else {
-          e.style.display = 'none';
-        // set CSS variable, faster than doing getElementById on TOC-button
-        root.style.setProperty('--TOC-text', '"...[show]"');
+        // console.log("setting display to none");
+        e.style.display = 'none';
       }
     }
+    tocDisplay = getComputedStyle(e).getPropertyValue("display"); // Refresh again
+
+    // console.log("display:", tocDisplay);
+    if( tocDisplay != 'block') { root.style.setProperty(CSS_VAR_TOC_TEXT, SHOW_TEXT ); }
+    else { root.style.setProperty(CSS_VAR_TOC_TEXT, HIDE_TEXT); }
+  }
     
-  // function toggle_TOC() {
-  //   toggle_visibility('TableOfContents');
-  //   show_TOC_text(e);
-  // }
-	if (document.readyState !== 'loading') { show_TOC_text(); }
-  else { document.addEventListener('DOMContentLoaded', show_TOC_text); }
-  
+  window.addEventListener("load", toggleTocIfNeeded(false), false); 
+ 
 </script>
   
 {{ end }} 
@@ -66,8 +57,6 @@
 
 </div>
 </article>
-
-
 
 {{ partial "disqus" . }}
 

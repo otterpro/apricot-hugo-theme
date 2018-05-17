@@ -72,11 +72,6 @@
   /* // Twitter, Github, RSS icons (inline SVG) */
   --social-icon-color: Gray; 
 
-  /* set in html */
-  /* --TOC-text-hide: "...[hide]"; */
-  /* --TOC-text-show: "...[show]"; */
-  --TOC-text: "";
-
 }
 /**
  * CSS Reset some basic elements
@@ -291,19 +286,20 @@ blockquote {
 #TableOfContents > ul { list-style-type: decimal;}
 #TableOfContents > ul > li > ul { list-style-type: lower-alpha;}
 
-#TableOfContents::before {
-  font-family: var(--serif-font-family);
-  /* border-bottom: 1px solid black; */
-  /* color: var(--primary-color); */
-  font-weight: bold;
-  /* content: "Table of Contents"; */
-}
+/* #TableOfContents::before { */
+/*   font-family: var(--serif-font-family); */
+/*   font-weight: bold; */
+/* } */
 
 #TableOfContents {
   border-radius: 0px;
   /* border-top-width: 0px; */
   margin-top: 0px;
   /* padding-top: 0px; */
+  /* display: var(--TOC-display); */
+
+  /* in Mobile view, hide the TOC by default */
+  display: none;
 }
 
 /* #TOC-header { */
@@ -451,9 +447,9 @@ aside {
 /*********************** NORMAL layout, make it 2 column ********************/
 @media screen and (min-width: 640px) {
   /* TODO: arbitrary for now */
-  :root {
+  /* :root { */
     /* --left-right-padding: 120px; */
-  }
+  /* } */
   
   main {
     /* width: 100%; */
@@ -517,15 +513,23 @@ aside {
 
   /* special case: 3 blockquotes indicate special aside */
   /* make it float right */
-  :not(blockquote) > blockquote > blockquote > blockquote, #TableOfContents {
+  :not(blockquote) > blockquote > blockquote > blockquote, #TableOfContents, #TOC-button {
     /* background-color: red; */
     float: right;
     width: var(--two-column-sidebar-width); /*30%;*/
     clear: both;
     /* padding-left: calc(var(--spacing-unit)/2); */
     /* padding-right: calc(var(--spacing-unit)/2); */
-
+  /* display: block; */
   }
+
+  #TOC-button {
+  }
+  /* at wide view, always start with showing TOC */
+  :root {
+    --TOC-display: block; 
+  }
+
   /* special case: 3 blockquotes indicate special aside */
   /* make it float right */
   :not(blockquote) > blockquote2 > blockquote > blockquote, #TableOfContents, #TOC-button{

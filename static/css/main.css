@@ -640,6 +640,7 @@ aside {
 
 /* SITE NAVIGATION */
 /* Laptop */
+@media screen and (min-width: 640px) {
 .site-nav {
   float: right;
   line-height: 56px; }
@@ -655,14 +656,13 @@ aside {
 
     .site-nav .page-link:not(:first-child) {
       margin-left: 20px; }
-
-/* Phone / small screen */
+}
+/* Phone / small screen -- show hamburger menu */
   /* @media screen and (max-width: var(--on-palm)) { */
   @media screen and (max-width: 639.9px) {
     .site-nav {
-      position: absolute;
-      top: 9px;
-      right: 30px;
+      z-index:100; /* if not set, NAV was covered by header's sub-title bar */
+      position: absolute; top: 9px; right: 30px; /* position of hamburger icon box */
       background-color: var(--bg-color);
       border: 1px solid LightGray;
       border-radius: 5px;
@@ -676,6 +676,8 @@ aside {
         padding-top: 10px;
         text-align: center; }
         .site-nav .menu-icon > svg {
+          /* hamburger menu SVG */
+          position: relative; top: -4px; /* tried to center burger vertically */
           width: 18px;
           height: 15px; }
           .site-nav .menu-icon > svg path {

@@ -7,6 +7,21 @@ tags = ["blog","responsive"]
 features = ["blog"]
 min_version = "0.38.2"
 
+### Example config.toml
+baseURL = "https://www.example.com"
+languageCode = "en-us"
+title = "My Hugo Website"
+theme = "apricot-hugo-theme"
+summaryLength = 15 # default = 70, but too long...
+copyright = "Copyright &copy; 2018 JOHN DOE. All Rights Reserved."
+#googleAnalytics = "UA-XXXXXXXX"
+#disqusShortname=""
+enableRobotsTXT = true  #robots.txt
+paginate = 10  #default:10
+
+# MENU example
+sectionPagesMenu = "main"
+
 [author]
   name = "Daniel Kim"
   homepage = "https://www.otter.pro/"
@@ -16,3 +31,10 @@ min_version = "0.38.2"
   name = ""
   homepage = ""
   repo = ""
+
+# MENU example
+[menu]
+ [[menu.main]]
+    name = "Github"
+    url = "https://github.com/otterpro/"
+    weight = 10

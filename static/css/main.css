@@ -31,9 +31,12 @@
   --primary-color: hsl(240,82%,31%);
   --primary-light-color: hsl(240,82%,95%);
   --primary-dark-color: hsl(240,82%,11%);
+
   
   --footer-bg-color: #ccc;
   
+  /* --heading-color: #ddd;  /* h1-h6 */ */
+
   /* columns  */
   --two-column-main-width: 70%;
   --two-column-sidebar-width: 35%;
@@ -182,6 +185,7 @@ li > ol {
  */
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal; /* 400;*/ 
+  color: var(--primary-dark-color);
 }
 
 h1 {
@@ -216,7 +220,8 @@ a {
   color: var(--primary-color);
   text-decoration: none; }
   a:hover {
-    color: var(--primary-dark-color);
+    /* color: var(--primary-dark-color); */
+    color: var(--primary-color);
     text-decoration: underline; }
 
 /**
